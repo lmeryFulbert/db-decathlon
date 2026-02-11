@@ -18,10 +18,9 @@ https://dbeaver.io/
 ### Comment utiliser le fichier SQL fourni :
 
 - Lancez DBeaver
-- Créez une nouvelle connexion SQLite
-- Indiquez un nouveau fichier .sqlite (par exemple exo1.sqlite)
-- Importez le script SQL que je vous fournis (.sql) via le menu SQL Editor > Execute Script
-- Les tables et données seront créées automatiquement
+- Ouvrir une nouvelle connexion SQLite
+- Indiquez votre fichier .sqlite (par exemple exo1.sqlite)
+- Les tables et données existent déjà
 - Vous pouvez ensuite faire vos requêtes (bouton SQL).
 
 Astuce :
