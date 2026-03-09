@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard : Les types de graphs avec chart.js</h1>
+    <div class="container">
+        <div class="grid">
+            <div class="card">
+                <h3>Bar chart</h3>
+                <canvas id="graph1"></canvas>
+            </div>
+            <div class="card">
+                <h3>Line chart</h3>
+                <canvas id="graph2"></canvas>
+            </div>
+            <div class="card">
+                <h3>Pie chart</h3>
+                <canvas id="graph3"></canvas>
+            </div>
+            <div class="card">
+                <h3>Doughnut chart</h3>
+                <canvas id="graph4"></canvas>
+            </div>
+            <div class="card">
+                <h3>Radar chart</h3>
+                <canvas id="graph5"></canvas>
+            </div>
+            <div class="card">
+                <h3>Polar Area</h3>
+                <canvas id="graph6"></canvas>
+            </div>
+            <div class="card">
+                <h3>Scatter</h3>
+                <canvas id="graph7"></canvas>
+            </div>
+            <div class="card">
+                <h3>Bubble</h3>
+                <canvas id="graph8"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        /* DONNEES COMMUNES */
+
+        const labels = ["A", "B", "C", "D", "E"];
+        const data = [12, 19, 8, 15, 10];
+
+        /* BAR */
+
+        new Chart(document.getElementById("graph1"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Ventes",
+                    data: data
+                }]
+            }
+        });
+
+
+        /* LINE */
+
+        new Chart(document.getElementById("graph2"), {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Evolution",
+                    data: data,
+                    fill: false,
+                    tension: 0.3
+                }]
+            }
+        });
+
+
+        /* PIE */
+
+        new Chart(document.getElementById("graph3"), {
+            type: "pie",
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data
+                }]
+            }
+        });
+
+
+        /* DOUGHNUT */
+
+        new Chart(document.getElementById("graph4"), {
+            type: "doughnut",
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data
+                }]
+            }
+        });
+
+
+        /* RADAR */
+
+        new Chart(document.getElementById("graph5"), {
+            type: "radar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Performance",
+                    data: data
+                }]
+            }
+        });
+
+
+        /* POLAR AREA */
+
+        new Chart(document.getElementById("graph6"), {
+            type: "polarArea",
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data
+                }]
+            }
+        });
+
+
+        // Fonction pour transformer un tableau simple de valeurs
+        // en tableau d'objets {x, y} utilisable par Chart.js pour un graphique scatter.
+        //       params:
+        //          - dataArray : tableau de nombres (ex: [12, 19, 8, 15, 10])
+        function toScatter(dataArray) {
+            const scatterData = [];
+
+            for (let i = 0; i < dataArray.length; i++) {
+                const xValue = i + 1;                       // Calcul de la coordonnée X
+                const yValue = dataArray[i];                // Récupération de la coordonnée Y
+                const point = { x: xValue, y: yValue };     // Création de l’objet
+                scatterData.push(point);                    // Ajout dans le tableau
+            }
+            return scatterData;
+        }
+
+        /* SCATTER */
+        //Remplacer la variable data par un appel correct a la fonction
+
+        new Chart(document.getElementById("graph7"), {
+            type: "scatter",
+            data: {
+                datasets: [{
+                    label: "Points",
+                    data: [
+                        { x: 1, y: 12 },
+                        { x: 2, y: 19 },
+                        { x: 3, y: 8 },
+                        { x: 4, y: 15 },
+                        { x: 5, y: 10 }
+                    ]
+                }]
+            }
+        });
+
+
+
+        // ===============================
+        // FONCTION BUBBLE
+        // ===============================
+
+        // Même idée que pour scatter, mais on ajoute un rayon fixe 'r' pour chaque point
+        //       params:
+        //          - dataArray : tableau de nombres (ex: [12, 19, 8, 15, 10])
+        //          - rValue : taille du rayon des bulles (ex: 8)
+        // Retourne un tableau d'objets {x, y, r} utilisable par Chart.js pour un bubble chart
+
+        new Chart(document.getElementById("graph8"), {
+            type: "bubble",
+            data: {
+                datasets: [{
+                    label: "Bulles",
+                    data: [
+                        { x: 1, y: 12, r: 10 },
+                        { x: 2, y: 19, r: 8 },
+                        { x: 3, y: 8, r: 12 },
+                        { x: 4, y: 15, r: 7 },
+                        { x: 5, y: 10, r: 9 }
+                    ]
+                }]
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
